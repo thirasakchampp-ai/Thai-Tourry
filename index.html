@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thai Tourry</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Import Google Fonts for 'Kanit' and 'Inter' */
+        @import url('https://fonts2.googleapis.com/css2?family=Inter:wght@400;500;700&family=Kanit:wght@300;400;500;700&display=swap');
+
+        /* Apply 'Kanit' as the primary font for the body, with 'Inter' and sans-serif as fallbacks */
+        body {
+            font-family: 'Kanit', 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Blinking cursor effect for typing */
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.2em;
+            /* Adjust height to match line height of text */
+            background-color: currentColor;
+            /* Matches text color */
+            animation: blink-caret .75s step-end infinite;
+            vertical-align: middle;
+            /* Align cursor vertically with text */
+            margin-left: 2px;
+            /* Small space after text */
+        }
+
+        @keyframes blink-caret {
+
+            from,
+            to {
+                background-color: transparent;
+            }
+
+            50% {
+                background-color: currentColor;
+            }
+        }
+
+        /* Fade-in animation for home section elements */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+            /* Start hidden */
+        }
+
+        /* Delay classes for staggered animation */
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-500 {
+            animation-delay: 0.5s;
+        }
+
+        .delay-800 {
+            animation-delay: 0.8s;
+        }
+
+        .delay-1000 {
+            animation-delay: 1s;
+        }
+
+        /* Custom aspect ratio for images (e.g., 16:9) */
+        .aspect-ratio-16-9 {
+            padding-bottom: 56.25%;
+            /* 9 / 16 * 100% */
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navbar -->
+    <header
+        class="bg-white bg-opacity-95 backdrop-blur-sm flex justify-between items-center py-4 px-6 md:px-12 fixed w-full top-0 z-50 shadow-md rounded-b-lg">
+        <div class="font-bold text-2xl text-teal-800">
+            Thai TourryWebsite
+        </div>
+        <nav class="hidden md:block">
+            <ul class="flex space-x-6 lg:space-x-8">
+                <li><a href="#home"
+                        class="text-lg text-gray-700 hover:text-white hover:bg-teal-600 px-5 py-2.5 rounded-full transition-colors duration-300 font-bold active:bg-teal-700">Home</a>
+                </li>
+                <li><a href="#destinations"
+                        class="text-lg text-gray-700 hover:text-white hover:bg-teal-600 px-5 py-2.5 rounded-full transition-colors duration-300 font-bold">Destinations</a>
+                </li>
+                <!-- <li><a href="#gallery"
+                        class="text-lg text-gray-700 hover:text-white hover:bg-teal-600 px-5 py-2.5 rounded-full transition-colors duration-300 font-bold">Gallery</a>
+                </li> -->
+                <li><a href="#contact"
+                        class="text-lg text-gray-700 hover:text-white hover:bg-teal-600 px-5 py-2.5 rounded-full transition-colors duration-300 font-bold">Contact</a>
+                </li>
+            </ul>
+        </nav>
+        <div
+            class="flex items-center rounded-full overflow-hidden shadow-sm border border-gray-300 flex-grow max-w-sm ml-4">
+            <input type="text" placeholder="ค้นหา..."
+                class="outline-none text-gray-800 bg-transparent placeholder-gray-500 text-base focus:ring-2 focus:ring-teal-400 w-full py-2.5 px-5">
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="relative h-screen bg-white pt-20 md:pt-0">
+        <!-- New container for centering content in Home section -->
+        <div
+            class="max-w-screen-xl mx-auto flex flex-col md:flex-row items-center justify-center w-full h-full px-6 md:px-12">
+            <!-- Text Content - Left Side (Full width on mobile, half on desktop) -->
+            <div
+                class="relative z-10 text-left w-full md:w-1/2 max-w-2xl flex flex-col items-center md:items-start mb-10 md:mb-0">
+                <!-- Original welcome text with adjusted font -->
+                <h3
+                    class="text-3xl md:text-4xl text-teal-600 mb-3 drop-shadow-lg font-bold animate-fade-in delay-200 text-center md:text-left">
+                    Welcome</h3>
+                <!-- Main title with typing effect -->
+                <h1
+                    class="text-5xl md:text-7xl font-extrabold leading-tight text-gray-800 mb-4 drop-shadow-xl animate-fade-in delay-500 text-center md:text-left">
+                    <span id="typed-text-home"></span><span class="typing-cursor" id="typing-cursor-home"></span>
+                </h1>
+                <!-- Introductory text (new tagline) -->
+                <p
+                    class="text-lg md:text-xl text-gray-600 mb-10 drop-shadow-md animate-fade-in delay-800 text-center md:text-left">
+                    เปิดประสบการณ์ท่องเที่ยวไทย สู่เส้นทางที่ไม่เคยค้นพบและสัมผัสมนต์เสน่ห์แห่งธรรมชาติ วัฒนธรรม และวิถีชีวิตที่หลากหลาย
+                    ที่รอให้คุณออกเดินทางและสร้างความทรงจำใหม่ในทุกก้าวของการผจญภัย</p>
+                <div class="mt-8 animate-fade-in delay-1000 flex flex-col sm:flex-row gap-4">
+                    <a href="#contact"
+                        class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-8 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                        <span class="mr-2 text-lg">ติดต่อเรา</span>
+                    </a>
+                    <a href="#destinations"
+                        class="inline-flex items-center bg-white border-2 border-teal-600 rounded-full py-3 px-8 font-bold text-teal-800 transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-50 justify-center">
+                        <span class="mr-2 text-lg">ดูเพิ่มเติม</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Image Content - Right Side (Full width on mobile, half on desktop) -->
+            <div class="w-full md:w-1/2 flex justify-center items-center h-full md:h-auto">
+                <img src="https://innmardin.com/assets/images/hero-banner.png" alt="Travel Hero Image"
+                    class="max-w-full h-auto object-cover animate-fade-in delay-1000"
+                    onerror="this.onerror=null;this.src='https://placehold.co/600x400/D1F0E0/306B6B?text=Image+Not+Found';">
+                <!-- The image source has been updated to your provided URL. An onerror fallback is included. -->
+                <!-- To make the background behind the person transparent, the image file itself must have a transparent background. -->
+                <!-- If the image has a white background as part of its pixels, you need to edit the image itself (e.g., using a photo editor) to remove the white background before uploading. -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section id="destinations" class="py-16 md:py-20 text-center bg-gray-50">
+        <div class="max-w-screen-xl mx-auto px-6 md:px-10">
+            <h2 class="text-4xl font-bold mb-12 text-teal-800"> 33 สถานที่ท่องเที่ยวยอดนิยมในไทย </h2>
+            <div class="flex flex-col gap-16 md:gap-20">
+                <!-- Destination Card - Bangkok -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <!-- Image container with aspect ratio for consistent height -->
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://www.b2hotel.com/wp-content/uploads/2023/01/Discover-Bangkok-1024x683.jpg" alt="กรุงเทพฯ"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">กรุงเทพมหานคร</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★★</span> (500 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            เมืองหลวงที่เต็มไปด้วยสีสัน วัฒนธรรมที่หลากหลาย แหล่งช้อปปิ้ง ร้านอาหารอร่อย
+                            และวัดวาอารามอันงดงามที่รอให้คุณมาสัมผัส.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 3 วัน 2 คืน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> ทุกเพศทุกวัย</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/QZyUaS8mMBLELu469" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Chiang Mai (Swapped Layout) -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row-reverse transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://roijang.com/wp-content/uploads/2023/01/%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B9%80%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%A7%E0%B9%80%E0%B8%8A%E0%B8%B5%E0%B8%A2%E0%B8%87%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%88.jpg" alt="เชียงใหม่"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-r-2xl md:rounded-tl-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">เชียงใหม่</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★★</span> (480 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            เมืองแห่งวัฒนธรรมล้านนา ท่ามกลางขุนเขาและธรรมชาติที่งดงาม พร้อมวัดวาอารามโบราณ กาแฟอร่อย
+                            และบรรยากาศสุดชิลล์.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 4 วัน 3 คืน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> คู่รัก, ครอบครัว,
+                                สายผจญภัย</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/6k8bdyvL27QTppXj6" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Phuket -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://www.ktc.co.th/pub/media/Travel-Story/Thailand/travel-in-phuket/travel-in-phuket-promo.webp" alt="ภูเก็ต"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">ภูเก็ต</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★★</span> (620 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            ไข่มุกแห่งอันดามันที่โด่งดังไปทั่วโลกด้วยชายหาดทรายขาว น้ำทะเลสีคราม และกิจกรรมทางน้ำมากมาย
+                            พร้อมชีวิตยามค่ำคืนที่คึกคัก.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 5 วัน 4 คืน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> ครอบครัว, คู่รัก,
+                                กลุ่มเพื่อน</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/zJEixbDAaJtaNjzB6" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Krabi (Swapped Layout) -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row-reverse transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://cms.dmpcdn.com/travel/2021/12/15/c4fd0f20-5d6d-11ec-96c5-79a6e95c0174_webp_original.jpg" alt="กระบี่"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-r-2xl md:rounded-tl-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">กระบี่</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★★</span> (490 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            สวรรค์ของนักผจญภัยและคนรักทะเล ด้วยหาดทรายขาวละเอียด ถ้ำหินปูนสูงตระหง่าน
+                            และเกาะน้อยใหญ่ที่งดงามราวภาพวาด.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 4 วัน 3 คืน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> นักปีนเขา, ดำน้ำ,
+                                พักผ่อน</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/rBo2gSWPnC2c7Zgn8" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Koh Samui -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://roijang.com/wp-content/uploads/2025/05/Smeaut.jpg" alt="เกาะสมุย"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">เกาะสมุย</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★★</span> (450 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            เกาะสวรรค์แห่งอ่าวไทย มีหาดเฉวงและหาดละไมที่เป็นที่นิยม รีสอร์ทหรูหรา
+                            และธรรมชาติที่ยังคงความบริสุทธิ์.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 3 วัน 2 คืน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> พักผ่อนหรู, ฮันนีมูน</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/Q79mUdEbTiJsLhsn6" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Pattaya (Swapped Layout) -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row-reverse transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://roijang.com/wp-content/uploads/2024/03/c6a34434-199b-4d29-9bbd-303f35262f76_0.jpg" alt="พัทยา"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-r-2xl md:rounded-tl-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">พัทยา</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★☆</span> (400 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            เมืองตากอากาศชายทะเลใกล้กรุงเทพฯ ที่มีชีวิตชีวาตลอด 24 ชั่วโมง ทั้งกิจกรรมทางน้ำ
+                            แหล่งบันเทิง และอาหารทะเลสดใหม่.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 2 วัน 1 คืน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> กลุ่มเพื่อน,
+                                พักผ่อนสั้นๆ</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/qKXJCbHZp5WxcZuKA" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Ayutthaya -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://roijang.com/wp-content/uploads/2023/12/%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%AD%E0%B8%A2%E0%B8%B8%E0%B8%98%E0%B8%A2%E0%B8%B2-2.jpg" alt="อยุธยา"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">อยุธยา</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★★</span> (380 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            อดีตราชธานีอันยิ่งใหญ่ของไทย มรดกโลกที่เต็มไปด้วยวัดวาอาราม โบราณสถาน
+                            และประวัติศาสตร์อันล้ำค่า.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 1 วัน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> ผู้สนใจประวัติศาสตร์,
+                                ทริปสั้นๆ</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/oENKy4JMvJWGVuq16" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Sukhothai (Swapped Layout) -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row-reverse transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://roijang.com/wp-content/uploads/2022/06/%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B9%80%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%A7%E0%B8%AA%E0%B8%B8%E0%B9%82%E0%B8%82%E0%B8%97%E0%B8%B1%E0%B8%A2.jpg"
+                                alt="สุโขทัย"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-r-2xl md:rounded-tl-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">สุโขทัย</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★★</span> (350 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            อุทยานประวัติศาสตร์สุโขทัย มรดกโลกที่สะท้อนความรุ่งเรืองของอาณาจักรสุโขทัยยุคแรก
+                            สัมผัสความงดงามของสถาปัตยกรรมเก่าแก่.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 2 วัน 1 คืน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> ผู้สนใจประวัติศาสตร์,
+                                ปั่นจักรยาน</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/oMyzK24xbUrgs5ME7" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Koh Lipe -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://www.prd.go.th/th/file/get/file/20240328ff14d8b23a0a28e47f9e4447531094f1151435.jpg" alt="เกาะหลีเป๊ะ"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">เกาะหลีเป๊ะ</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★★</span> (550 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            มัลดีฟส์เมืองไทยแห่งอันดามันใต้ น้ำทะเลใสราวคริสตัล หาดทรายขาวละเอียด
+                            และปะการังที่สมบูรณ์เหมาะแก่การดำน้ำ.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 3 วัน 2 คืน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> ดำน้ำ, พักผ่อน</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/eNYtoHAgiLHpBWDE9" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Nan (Swapped Layout) -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row-reverse transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxQLTvWFrsFtJTOd8AwYb05sqSnqdRwcOu5e6w8iK9Az9Ie9JrZG2nWsrwLV-j0tWGATQ&usqp=CAU" alt="น่าน"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-r-2xl md:rounded-tl-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">น่าน</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★★</span> (420 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            เมืองแห่งขุนเขาและวัฒนธรรมล้านนาตะวันออกที่เงียบสงบ วัดวาอารามสวยงาม ทุ่งนาเขียวขจี
+                            และวิถีชีวิตเรียบง่าย.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 3 วัน 2 คืน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> สายชิลล์, ผู้รักธรรมชาติ</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/6Gg4tA1B1Kzr69fDA" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Chiang Rai -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://www.wonderfulpackage.com/uploads/moxie/Article/Inbound/Content_Inbound/022_chiangrai/cover-chiangrai-th.jpg" alt="เชียงราย"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">เชียงราย</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★★</span> (470 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            เมืองศิลปะวัฒนธรรมแห่งภาคเหนือ มีวัดร่องขุ่นและวัดสีน้ำเงินที่เป็นเอกลักษณ์
+                            พร้อมภูเขาและไร่ชาที่สวยงาม.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 3 วัน 2 คืน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> ผู้รักศิลปะ, ธรรมชาติ</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/EqMXeCJyApnw6kkK7" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Hua Hin (Swapped Layout) -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row-reverse transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://roijang.com/wp-content/uploads/2025/03/Hauhin.jpg" alt="หัวหิน"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-r-2xl md:rounded-tl-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">หัวหิน</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★☆</span> (390 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            เมืองตากอากาศชายทะเลสุดคลาสสิกของราชวงศ์และชนชั้นสูง มีชายหาดสวยงาม ตลาดกลางคืน
+                            และวังไกลกังวล.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 2 วัน 1 คืน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> ครอบครัว, พักผ่อน</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/jUH3Qp5M2QcqzTx88" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Koh Phi Phi -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://ik.imagekit.io/tvlk/blog/2024/11/Blog-6.jpg?tr=q-70,c-at_max,w-500,h-250,dpr-2" alt="เกาะพีพี"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">เกาะพีพี</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★★</span> (580 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            หมู่เกาะที่มีชื่อเสียงระดับโลกในกระบี่ โดดเด่นด้วยอ่าวมาหยาที่สวยงาม น้ำทะเลใส หาดทรายขาว
+                            และกิจกรรมดำน้ำ.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 3 วัน 2 คืน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> ดำน้ำ, เที่ยวเกาะ</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/qAMGDaaak6PcLNuS6" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 =119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Khao Yai (Swapped Layout) -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row-reverse transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCvGeYTK3jzKGR_tlFFDbTJjkBLoQLYB27OQ&s" alt="เขาใหญ่"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-r-2xl md:rounded-tl-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">เขาใหญ่</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★☆</span> (410 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            อุทยานแห่งชาติเขาใหญ่ มรดกโลกทางธรรมชาติ อากาศดี มีน้ำตกสวยงาม ฟาร์ม ไร่องุ่น และคาเฟ่ชิคๆ.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 2 วัน 1 คืน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> ครอบครัว, สายธรรมชาติ</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/1UA8a8W6BbtDmvAo6" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Pai -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://roijang.com/wp-content/uploads/2023/12/%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B9%80%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%A7%E0%B8%9B%E0%B8%B2%E0%B8%A2.jpg" alt="ปาย"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">ปาย</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★☆</span> (370 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            เมืองเล็กๆ สุดชิลล์ในแม่ฮ่องสอน บรรยากาศเงียบสงบ หุบเขาเขียวขจี และวิถีชีวิตแบบสโลว์ไลฟ์.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 3 วัน 2 คืน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> สายฮิป, พักผ่อน</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/9fFtoq8e8ayt63K2A" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Koh Chang (Swapped Layout) -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row-reverse transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://roijang.com/wp-content/uploads/2023/09/%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B9%80%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%A7%E0%B9%80%E0%B8%81%E0%B8%B2%E0%B8%B0%E0%B8%8A%E0%B9%89%E0%B8%B2%E0%B8%87-2.jpg" alt="เกาะช้าง"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-r-2xl md:rounded-tl-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">เกาะช้าง</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★☆</span> (430 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            เกาะใหญ่เป็นอันดับสองของไทยในทะเลอ่าวไทย มีหาดทรายขาว น้ำตก และป่าชายเลนที่อุดมสมบูรณ์.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 3 วัน 2 คืน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> ทะเล, ธรรมชาติ, ผจญภัย</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/cJGkDm5ah218f5dJA" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Erawan Waterfall -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://blog.drivehub.co/wp-content/uploads/2025/03/Blog-Erawan-Waterfall.jpg"
+                                alt="น้ำตกเอราวัณ"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">น้ำตกเอราวัณ</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★★</span> (395 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            น้ำตกหินปูนที่สวยงามในกาญจนบุรี มี 7 ชั้น แต่ละชั้นมีแอ่งน้ำสีเขียวมรกตใสสะอาด
+                            เหมาะแก่การเล่นน้ำ.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 1 วัน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> ผู้รักธรรมชาติ, เล่นน้ำ</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/rXEigQ3da7RmVogp6" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Doi Inthanon -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row-reverse transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQScA_tZ6aCNoupbeqtHhFV8hSkhoRzw1BBVanKjJy5romnggkyFVk_C2aqCJqrciMgxSY&usqp=CAU"
+                                alt="ดอยอินทนนท์"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-r-2xl md:rounded-tl-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">ดอยอินทนนท์</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★★</span> (460 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            ยอดเขาที่สูงที่สุดในประเทศไทย อากาศเย็นสบายตลอดปี มีน้ำตก ป่าสน และจุดชมวิวที่สวยงาม.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 2 วัน 1 คืน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> สายธรรมชาติ, ชมวิว</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/SUL53drjEGAh1eps5" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Koh Lanta -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://roijang.com/wp-content/uploads/2022/12/Things-to-do-on-Koh-Lanta.jpg" alt="เกาะลันตา"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">เกาะลันตา</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★☆</span> (360 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            เกาะสงบเงียบในกระบี่ ที่เหมาะสำหรับการพักผ่อนอย่างแท้จริง มีหาดทรายยาว ทะเลใส
+                            และบรรยากาศยามเย็นที่โรแมนติก.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 3 วัน 2 คืน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> พักผ่อน, คู่รัก</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/yrBJaN5MRhzKFQp6A" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Koh Phangan (Swapped Layout) -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row-reverse transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://img.wongnai.com/p/1920x0/2019/04/29/5a719eb98a874f0eac50ee7a8981d531.jpg"
+                                alt="เกาะพะงัน"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-r-2xl md:rounded-tl-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">เกาะพะงัน</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★☆</span> (340 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            โด่งดังจาก Full Moon Party แต่ก็มีมุมสงบเงียบ ชายหาดสวยงาม
+                            และกิจกรรมโยคะสำหรับผู้แสวงหาความสงบ.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 3 วัน 2 คืน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> ปาร์ตี้, โยคะ, พักผ่อน</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/ciRgDY6sjhZkLiRc8" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Similan Islands -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnuxVD1WfLMRWBdYHaupf0S7QVMMbNmim2Ug&s"
+                                alt="หมู่เกาะสิมิลัน"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">หมู่เกาะสิมิลัน</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★★</span> (600 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            หนึ่งในแหล่งดำน้ำที่ดีที่สุดในโลก มีน้ำทะเลใสสีฟ้า หาดทรายขาวละเอียด
+                            และปะการังที่สมบูรณ์สวยงาม.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 1 วัน (ดำน้ำ)</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> นักดำน้ำ,
+                                ชมธรรมชาติใต้ทะเล</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/Ke7Ytfbnj5WimPGQA" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Koh Kood (Swapped Layout) -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row-reverse transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://roijang.com/wp-content/uploads/2022/03/%E0%B9%80%E0%B8%81%E0%B8%B2%E0%B8%B0%E0%B8%81%E0%B8%B9%E0%B8%94-1.jpg" alt="เกาะกูด"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-r-2xl md:rounded-tl-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">เกาะกูด</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★★</span> (385 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            เกาะสุดท้ายในภาคตะวันออกที่ยังคงความเป็นธรรมชาติสูง มีน้ำทะเลใส ชายหาดสวย
+                            และเป็นแหล่งพักผ่อนเงียบสงบ.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 3 วัน 2 คืน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> พักผ่อนหรู,
+                                หลบความวุ่นวาย</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/8VL1JbrxgjjD9VmM9" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Loei (Phu Ruea) -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://my.kapook.com/imagescontent/fb_img/964/s_173445_9406.jpg" alt="เลย (ภูเรือ)"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">เลย (ภูเรือ)</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★☆</span> (320 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            จังหวัดที่ขึ้นชื่อเรื่องอากาศหนาวเย็นตลอดปี โดยเฉพาะที่ภูเรือและเชียงคาน
+                            เหมาะสำหรับชมทะเลหมอกและสัมผัสวิถีชีวิตริมโขง.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 2 วัน 1 คืน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> สายหนาว, ธรรมชาติ</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/iP3pNTV7HwHTLWG78" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Kanchanaburi -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row-reverse transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://www.checkinchill.com/storage/content/be01340d-a4c7-4ab8-962d-3b1ebc6a9708.webp" alt="กาญจนบุรี"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-r-2xl md:rounded-tl-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">กาญจนบุรี</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★☆</span> (415 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            เมืองแห่งประวัติศาสตร์และธรรมชาติ มีสะพานข้ามแม่น้ำแคว น้ำตกเอราวัณ และที่พักแพริมน้ำ.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 2 วัน 1 คืน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> ประวัติศาสตร์, ธรรมชาติ</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/JWDqTkr2hciQzXCRA" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Samut Prakan (Ancient City) -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://my.kapook.com/imagescontent/fb_img/486/s_179946_4830.jpg"
+                                alt="เมืองโบราณ"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">เมืองโบราณ สมุทรปราการ</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★☆</span> (300 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            พิพิธภัณฑ์กลางแจ้งที่ใหญ่ที่สุดในโลก
+                            รวบรวมสถาปัตยกรรมและประติมากรรมจำลองจากทั่วไทยไว้ในที่เดียว.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 1 วัน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> ผู้สนใจวัฒนธรรม,
+                                ครอบครัว</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/AG2j9ZSrMnZfZxo99" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Phanom Rung -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row-reverse transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="data:image/jpeg;base64,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"
+                                alt="ปราสาทหินพนมรุ้ง"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-r-2xl md:rounded-tl-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">ปราสาทหินพนมรุ้ง</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★★</span> (310 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            ปราสาทหินทรายสีชมพูศิลปะขอมโบราณที่สวยงามและสมบูรณ์ที่สุดแห่งหนึ่งในประเทศไทย
+                            ตั้งอยู่บนยอดภูเขาไฟเก่า.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 1 วัน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> ผู้สนใจประวัติศาสตร์,
+                                สถาปัตยกรรม</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/WSuKeTHqKa6tseVt7" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Koh Hong -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRh8TM3W-ehQ3ir7tGNMTzkDkrO_XetGUPWvg&s" alt="เกาะห้อง"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">เกาะห้อง (กระบี่)</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★★</span> (480 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            อัญมณีแห่งกระบี่ มีลากูนที่ซ่อนอยู่ภายใน และหาดทรายขาวละเอียด
+                            เหมาะสำหรับการพายคายัคและพักผ่อน.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 1 วัน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> ทะเล, พายเรือ</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/sUd356uJW4FVTZcW7" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Trat (Koh Mak) -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row-reverse transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://roijang.com/wp-content/uploads/2022/12/%E0%B9%80%E0%B8%81%E0%B8%B2%E0%B8%B0%E0%B8%AB%E0%B8%A1%E0%B8%B2%E0%B8%81.jpg" alt="เกาะหมาก"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-r-2xl md:rounded-tl-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">เกาะหมาก (ตราด)</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★☆</span> (290 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            เกาะที่เงียบสงบ เหมาะสำหรับผู้ที่ต้องการหลีกหนีความวุ่นวาย
+                            มีชายหาดส่วนตัวและธรรมชาติที่สมบูรณ์.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 3 วัน 2 คืน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> พักผ่อน,
+                                หลีกหนีความวุ่นวาย</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/yNfVejMixEp1rg3m6" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Chumphon (Koh Tao) -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://roijang.com/wp-content/uploads/2022/06/%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B9%80%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%A7%E0%B9%80%E0%B8%81%E0%B8%B2%E0%B8%B0%E0%B9%80%E0%B8%95%E0%B9%88%E0%B8%B2.jpg" alt="เกาะเต่า"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">เกาะเต่า (ชุมพร)</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★★</span> (520 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            เกาะเล็กๆ ที่มีชื่อเสียงระดับโลกในฐานะแหล่งดำน้ำชั้นนำของอ่าวไทย
+                            มีจุดดำน้ำที่สวยงามและหลักสูตรดำน้ำราคาไม่แพง.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 3 วัน 2 คืน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> ดำน้ำ, เรียนดำน้ำ</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/z8p2CbTHoTrksLHJA" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Phetchabun (Phu Thap Boek) -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row-reverse transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNRgMKskFN2OImIBc5zZ569f8iTi8g5kAOyw&s"
+                                alt="ภูทับเบิก"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-r-2xl md:rounded-tl-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">ภูทับเบิก (เพชรบูรณ์)</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★☆</span> (355 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            ยอดเขาที่สูงที่สุดของเพชรบูรณ์ อากาศหนาวเย็นตลอดปี มีทะเลหมอกให้ชมในยามเช้า
+                            และแปลงกะหล่ำปลีขนาดใหญ่.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 2 วัน 1 คืน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> ชมทะเลหมอก, สายหนาว</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/ygd9ELjoJAstGakX8" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Udon Thani (Red Lotus Sea) -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://cms.dmpcdn.com/travel/2021/10/28/fbec12c0-37ba-11ec-8bb3-331af8ec0c78_original.jpg" alt="ทะเลบัวแดง"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">ทะเลบัวแดง (อุดรธานี)</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★★</span> (330 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            แหล่งท่องเที่ยว Unseen Thailand ที่บัวแดงจะบานสะพรั่งเต็มบึงหนองหานกุมภวาปี ในช่วงฤดูหนาว.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 1 วัน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> ชมธรรมชาติ, ถ่ายภาพ</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/5zkLNEHN9f6V7mB5A" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Hat Yai (Songkhla) -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row-reverse transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://roijang.com/wp-content/uploads/2023/12/ab521299-6275-4446-ae7e-046a06adb762_0.jpg" alt="หาดใหญ่"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-r-2xl md:rounded-tl-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">หาดใหญ่ (สงขลา)</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★☆</span> (380 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            เมืองเศรษฐกิจและแหล่งช้อปปิ้งสำคัญของภาคใต้ มีอาหารอร่อยและสถานที่ท่องเที่ยวหลากหลาย.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 3 วัน 2 คืน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> ช้อปปิ้ง, หาของอร่อย</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/NdPi4puX3u9bvkd68" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Destination Card - Phra Nakhon Si Ayutthaya -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative w-full aspect-ratio-16-9">
+                            <img src="https://img.salehere.co.th/p/1200x0/2022/09/16/0kdpyv0xtxze.jpg"
+                                alt="วัดไชยวัฒนาราม"
+                                class="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">วัดไชยวัฒนาราม (อยุธยา)</h3>
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <span class="text-xl">★★★★★</span> (440 รีวิว)
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            หนึ่งในโบราณสถานสำคัญและสวยงามที่สุดของอยุธยา
+                            มีสถาปัตยกรรมแบบขอมโบราณที่ยิ่งใหญ่ริมแม่น้ำเจ้าพระยา.
+                        </p>
+                        <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                            <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> 1 วัน</span>
+                            <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> ผู้สนใจประวัติศาสตร์,
+                                ถ่ายภาพ</span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/GLPX1b3shJ5JxWCf8" target="_blank"
+                            class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            ดูแผนที่
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section
+    <section id="gallery" class="py-16 md:py-20 text-center bg-white">
+        <div class="max-w-screen-xl mx-auto px-6 md:px-10">
+            <h2 class="text-4xl font-bold mb-12 text-teal-800">แกลเลอรีภาพความประทับใจ</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+                <img src="https://source.unsplash.com/300x200/?beach,thailand,island" alt="ภาพชายหาด"
+                    class="w-full h-40 object-cover rounded-lg shadow-md transition-transform hover:scale-105 duration-300">
+                <img src="https://source.unsplash.com/300x200/?temple,thailand,buddha" alt="ภาพวัด"
+                    class="w-full h-40 object-cover rounded-lg shadow-md transition-transform hover:scale-105 duration-300">
+                <img src="https://source.unsplash.com/300x200/?mountain,thailand,fog" alt="ภาพภูเขา"
+                    class="w-full h-40 object-cover rounded-lg shadow-md transition-transform hover:scale-105 duration-300">
+                <img src="https://source.unsplash.com/300x200/?market,thailand,food" alt="ภาพตลาด"
+                    class="w-full h-40 object-cover rounded-lg shadow-md transition-transform hover:scale-105 duration-300">
+                <img src="https://source.unsplash.com/300x200/?island,thailand,ocean" alt="ภาพเกาะ"
+                    class="w-full h-40 object-cover rounded-lg shadow-md transition-transform hover:scale-105 duration-300">
+                <img src="https://source.unsplash.com/300x200/?festival,thailand,lantern" alt="ภาพเทศกาล"
+                    class="w-full h-40 object-cover rounded-lg shadow-md transition-transform hover:scale-105 duration-300">
+                <img src="https://source.unsplash.com/300x200/?waterfall,thailand,nature" alt="ภาพน้ำตก"
+                    class="w-full h-40 object-cover rounded-lg shadow-md transition-transform hover:scale-105 duration-300">
+                <img src="https://source.unsplash.com/300x200/?city,thailand,skyline" alt="ภาพเมือง"
+                    class="w-full h-40 object-cover rounded-lg shadow-md transition-transform hover:scale-105 duration-300">
+                <img src="https://source.unsplash.com/300x200/?thai,cuisine,food" alt="ภาพอาหารไทย"
+                    class="w-full h-40 object-cover rounded-lg shadow-md transition-transform hover:scale-105 duration-300">
+                <img src="https://source.unsplash.com/300x200/?elephant,thailand,sanctuary" alt="ภาพช้าง"
+                    class="w-full h-40 object-cover rounded-lg shadow-md transition-transform hover:scale-105 duration-300">
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 md:py-20 text-center bg-gray-50">
+        <div class="max-w-screen-xl mx-auto px-6 md:px-10">
+            <h2 class="text-4xl font-bold mb-12 text-teal-800">ติดต่อเรา</h2>
+            <form class="contact-form max-w-lg mx-auto bg-white p-8 rounded-xl shadow-xl">
+                <input type="text" placeholder="ชื่อของคุณ" required
+                    class="w-full mb-4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-200">
+                <input type="email" placeholder="อีเมลของคุณ" required
+                    class="w-full mb-4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-200"></input>
+                <textarea placeholder="ข้อความของคุณ" required rows="6"
+                    class="w-full mb-6 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 resize-y transition-all duration-200"></textarea>
+                <button type="submit"
+                    class="bg-orange-500 text-white font-bold py-3 px-8 rounded-full cursor-pointer hover:bg-teal-800 transition-colors duration-300 transform hover:scale-105 shadow-lg">ส่งข้อความ</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-teal-800 text-white text-center py-6 mt-16 rounded-t-lg">
+        <p>&copy; 2025 Thait Tonrry. สงวนลิขสิทธิ์</p>
+        <p class="mt-2 text-sm">ออกแบบและพัฒนาโดยทีม Thait Tonrry เพื่อการท่องเที่ยวที่สมบูรณ์แบบของคุณ</p>
+    </footer>
+
+    <script>
+        // JavaScript for typing effect on Home Section title
+        document.addEventListener('DOMContentLoaded', function () {
+            const textElementHome = document.getElementById('typed-text-home');
+            const cursorElementHome = document.getElementById('typing-cursor-home');
+            const textToTypeHome = "Website Thai Tonrry";
+            let charIndexHome = 0;
+            const typingSpeed = 150; // Milliseconds per character for typing
+            const pauseAfterType = 2000; // Pause after typing (2 seconds)
+
+            function typeWriter() {
+                if (charIndexHome < textToTypeHome.length) {
+                    // Typing character by character
+                    textElementHome.textContent += textToTypeHome.charAt(charIndexHome);
+                    charIndexHome++;
+                    setTimeout(typeWriter, typingSpeed);
+                } else {
+                    // Finished typing, pause, then reset and restart
+                    setTimeout(() => {
+                        textElementHome.textContent = ''; // Clear text instantly
+                        charIndexHome = 0; // Reset character index
+                        typeWriter(); // Restart typing from the beginning
+                    }, pauseAfterType);
+                }
+            }
+
+            typeWriter(); // Start the typing animation when the page loads
+        });
+    </script>
+
+</body>
+
+</html>
