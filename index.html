@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThaiTourry</title>
+    <!-- Favicon - Web Icon -->
+    <link rel="icon" href="https://www.flaticon.com/svg/v2/svg/3003/3003184.svg" type="image/svg+xml">
+    <!-- You can replace this URL with your actual favicon file (e.g., .ico, .png, .svg) -->
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Import Google Fonts for 'Kanit' and 'Inter' */
+        @import url('https://fonts2.googleapis.com/css2?family=Inter:wght@400;500;700&family=Kanit:wght@300;400;500;700&display=swap');
+
+        /* Apply 'Kanit' as the primary font for the body, with 'Inter' and sans-serif as fallbacks */
+        body {
+            font-family: 'Kanit', 'Inter', sans-serif;
+        }
+
+        /* Blinking cursor effect for typing */
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.2em;
+            background-color: currentColor;
+            animation: blink-caret .75s step-end infinite;
+            vertical-align: middle;
+            margin-left: 2px;
+        }
+
+        @keyframes blink-caret {
+
+            from,
+            to {
+                background-color: transparent;
+            }
+
+            50% {
+                background-color: currentColor;
+            }
+        }
+
+        /* Custom aspect ratio for images (e.g., 16:9) */
+        .aspect-ratio-16-9 {
+            padding-bottom: 56.25%;
+        }
+
+        /* Styles for the Province Detail Modal (Combined Modal) */
+        .province-detail-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1020;
+            /* High z-index to ensure it's on top */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+            overflow-y: auto;
+            /* Allow scrolling for modal content */
+        }
+
+        .province-detail-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .province-detail-modal-content {
+            background-color: white;
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 800px;
+            /* Slightly wider for more content */
+            width: 90%;
+            max-height: 90%;
+            /* Limit height to allow for scrolling */
+            overflow-y: auto;
+            /* Ensure content inside can scroll */
+            transform: scale(0.9);
+            transition: transform 0.3s ease-out;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        .province-detail-modal-overlay.active .province-detail-modal-content {
+            transform: scale(1);
+        }
+
+        /* Styles for individual sub-destination blocks within the modal */
+        .sub-destination-block {
+            background-color: #f8f8f8;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .sub-destination-block:last-child {
+            margin-bottom: 0;
+            /* No bottom margin for the last block */
+        }
+
+        .sub-destination-block img {
+            width: 100%;
+            height: 250px;
+            /* Fixed height for consistent image display */
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navbar -->
+    <header
+        class="bg-white bg-opacity-95 backdrop-blur-sm flex justify-between items-center py-4 px-6 md:px-12 fixed w-full top-0 z-50 shadow-md rounded-b-lg">
+        <div class="font-bold text-2xl text-teal-800">
+            Thai Tourry
+        </div>
+        <nav class="hidden md:block">
+            <ul class="flex space-x-6 lg:space-x-8">
+                <li><a href="#home"
+                        class="text-lg text-gray-700 hover:text-white hover:bg-teal-600 px-5 py-2.5 rounded-full transition-colors duration-300 font-bold active:bg-teal-700">Home</a>
+                </li>
+                <li><a href="#destinations"
+                        class="text-lg text-gray-700 hover:text-white hover:bg-teal-600 px-5 py-2.5 rounded-full transition-colors duration-300 font-bold">Destinations</a>
+                </li>
+                <!-- Removed 'ที่พัก' link -->
+                <!-- Removed 'Gallery' link -->
+                <li><a href="#contact"
+                        class="text-lg text-gray-700 hover:text-white hover:bg-teal-600 px-5 py-2.5 rounded-full transition-colors duration-300 font-bold">Contact</a>
+                </li>
+            </ul>
+        </nav>
+        <div
+            class="flex items-center rounded-full overflow-hidden shadow-sm border border-gray-300 flex-grow max-w-sm ml-4">
+            <input type="text" placeholder="ค้นหา..."
+                class="outline-none text-gray-800 bg-transparent placeholder-gray-500 text-base focus:ring-2 focus:ring-teal-400 w-full py-2.5 px-5">
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="relative h-screen bg-white pt-20 md:pt-0">
+        <!-- New container for centering content in Home section -->
+        <div
+            class="max-w-screen-xl mx-auto flex flex-col md:flex-row items-center justify-center w-full h-full px-6 md:px-12">
+            <!-- Text Content - Left Side (Full width on mobile, half on desktop) -->
+            <div
+                class="relative z-10 text-left w-full md:w-1/2 max-w-2xl flex flex-col items-center md:items-start mb-10 md:mb-0">
+                <!-- Original welcome text with adjusted font -->
+                <h3 class="text-3xl md:text-4xl text-teal-600 mb-3 drop-shadow-lg font-bold text-center md:text-left">
+                    Welcome</h3>
+                <!-- Main title with typing effect -->
+                <h1
+                    class="text-5xl md:text-7xl font-extrabold leading-tight text-gray-800 mb-4 drop-shadow-xl text-center md:text-left">
+                    <span id="typed-text-home"></span><span class="typing-cursor" id="typing-cursor-home"></span>
+                </h1>
+                <!-- Introductory text (new tagline) -->
+                <p class="text-lg md:text-xl text-gray-600 mb-10 drop-shadow-md text-center md:text-left">
+                    เปิดประสบการณ์ท่องเที่ยวไทย
+                    สู่เส้นทางที่ไม่เคยค้นพบและสัมผัสมนต์เสน่ห์แห่งธรรมชาติ วัฒนธรรม และวิถีชีวิตที่หลากหลาย
+                    ที่รอให้คุณออกเดินทางและสร้างความทรงจำใหม่ในทุกก้าวของการผจญภัย</p>
+                <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                    <a href="#contact"
+                        class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-8 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                        <span class="mr-2 text-lg">ติดต่อเรา</span>
+                    </a>
+                    <a href="#destinations"
+                        class="inline-flex items-center bg-white border-2 border-teal-600 rounded-full py-3 px-8 font-bold text-teal-800 transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-50 justify-center">
+                        <span class="mr-2 text-lg">ดูเพิ่มเติม</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Image Content - Right Side (Full width on mobile, half on desktop) -->
+            <div class="w-full md:w-1/2 flex justify-center items-center h-full md:h-auto">
+                <img src="https://innmardin.com/assets/images/hero-banner.png" alt="Travel Hero Image"
+                    class="max-w-full h-auto object-cover"
+                    onerror="this.onerror=null;this.src='https://placehold.co/600x400/D1F0E0/306B6B?text=Image+Not+Found';">
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section id="destinations" class="py-16 md:py-20 text-center bg-gray-50">
+        <div class="max-w-screen-xl mx-auto px-6 md:px-10">
+            <h2 class="text-4xl font-bold mb-12 text-teal-800"> 10 จังหวัดและสถานที่ท่องเที่ยวยอดนิยมในไทย </h2>
+            <div id="destination-cards-container" class="flex flex-col gap-16 md:gap-20">
+                <!-- Destination cards will be dynamically loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Removed Accommodations Section -->
+    <!-- Removed Gallery Section -->
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 md:py-20 text-center bg-white">
+        <div class="max-w-screen-xl mx-auto px-6 md:px-10">
+            <h2 class="text-4xl font-bold mb-12 text-teal-800">ติดต่อเรา</h2>
+            <form class="contact-form max-w-lg mx-auto bg-white p-8 rounded-xl shadow-xl">
+                <input type="text" placeholder="ชื่อของคุณ" required
+                    class="w-full mb-4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-200">
+                <input type="email" placeholder="อีเมลของคุณ" required
+                    class="w-full mb-4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-200"></input>
+                <textarea placeholder="ข้อความของคุณ" required rows="6"
+                    class="w-full mb-6 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 resize-y transition-all duration-200"></textarea>
+                <button type="submit"
+                    class="bg-orange-500 text-white font-bold py-3 px-8 rounded-full cursor-pointer hover:bg-teal-800 transition-colors duration-300 transform hover:scale-105 shadow-lg">ส่งข้อความ</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-teal-800 text-white text-center py-6 mt-16 rounded-t-lg">
+        <p>เว็บไซต์นี้จัดทำขึ้นเพื่อการศึกษาเท่านั้น ภาพประกอบบางส่วนได้มาจาก Google ภาพ/อินเทอร์เน็ต</p>
+        <p class="mt-2 text-sm">โดยไม่มีเจตนาเชิงพาณิชย์
+        ลิขสิทธิ์ภาพเป็นของเจ้าของผลงานตามแหล่งที่มานะครับ</p>
+    </footer>
+
+    <!-- Province Detail Modal (Combined Modal: Shows all sub-destinations for a province) -->
+    <div id="province-detail-modal" class="province-detail-modal-overlay">
+        <div class="province-detail-modal-content">
+            <!-- Removed the close button from here -->
+            <h3 id="province-detail-title" class="text-3xl font-bold text-teal-700 mb-6 text-center"></h3>
+
+            <!-- Tourist Destinations Section -->
+            <h4 class="text-2xl font-bold text-teal-600 mb-4 mt-8">สถานที่ท่องเที่ยว</h4>
+            <div id="province-sub-destinations-container" class="space-y-8">
+                <!-- Each sub-destination's full detail will be dynamically loaded here by JS -->
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Typing Effect for Home Section Title ---
+            const textElementHome = document.getElementById('typed-text-home');
+            const cursorElementHome = document.getElementById('typing-cursor-home');
+            const textToTypeHome = "Website Thai Tourry";
+            let charIndexHome = 0;
+            const typingSpeed = 150;
+            const pauseAfterType = 2000;
+
+            function typeWriter() {
+                if (charIndexHome < textToTypeHome.length) {
+                    textElementHome.textContent += textToTypeHome.charAt(charIndexHome);
+                    charIndexHome++;
+                    setTimeout(typeWriter, typingSpeed);
+                } else {
+                    setTimeout(() => {
+                        textElementHome.textContent = '';
+                        charIndexHome = 0;
+                        typeWriter();
+                    }, pauseAfterType);
+                }
+            }
+            typeWriter();
+
+            // --- Data for Destinations (Updated to Top 10 Most Visited Provinces) ---
+            const destinationsData = [
+                {
+                    id: 'bangkok',
+                    name: 'กรุงเทพมหานคร',
+                    description: 'เมืองหลวงที่เต็มไปด้วยสีสัน วัฒนธรรมที่หลากหลาย แหล่งช้อปปิ้ง ร้านอาหารอร่อย และวัดวาอารามอันงดงามที่รอให้คุณมาสัมผัส.',
+                    duration: '3 วัน 2 คืน',
+                    suitable: 'ทุกเพศทุกวัย',
+                    image: 'https://www.b2hotel.com/wp-content/uploads/2023/01/Discover-Bangkok-1024x683.jpg',
+                    map_link: 'https://maps.app.goo.gl/QZyUaS8mMBLELu469',
+                    sub_destinations: [
+                        {
+                            name: 'วัดอรุณราชวราราม',
+                            description: 'วัดโบราณริมแม่น้ำเจ้าพระยา หนึ่งในสัญลักษณ์สำคัญของกรุงเทพฯ โดดเด่นด้วยพระปรางค์สีขาวประดับกระเบื้องเคลือบและเครื่องถ้วยเบญจรงค์.',
+                            time: '08:00 - 17:30 น.',
+                            price: 'ชาวต่างชาติ 100 บาท, คนไทยฟรี',
+                            map_link: 'https://maps.app.goo.gl/xGkeZ9dFy9LHrhap7',
+                            images: [
+                                'https://dhammathai.org/watthai/data/imagedb/2-1.jpg',
+                                'https://dhammathai.org/watthai/data/imagedb/2-1.jpg'
+                            ]
+                        },
+                        {
+                            name: 'ไอคอนสยาม',
+                            description: 'ห้างสรรพสินค้าหรูหราและแหล่งรวมความบันเทิงริมแม่น้ำเจ้าพระยา มีทั้งร้านค้าแบรนด์เนม ร้านอาหาร สวนสนุกในร่ม และระบำน้ำพุสุดอลังการ.',
+                            time: '10:00 - 22:00 น.',
+                            price: 'ฟรี (กิจกรรมบางอย่างมีค่าใช้จ่าย)',
+                            map_link: 'https://maps.app.goo.gl/Trff6nFzzWY7cRfn6',
+                            images: [
+                                'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/24/58/07/d4/iconsiam.jpg?w=900&h=500&s=1',
+                                'https://placehold.co/700x250/FFC0CB/FF69B4?text=ไอคอนสยาม+2'
+                            ]
+                        },
+                        {
+                            name: 'ถนนข้าวสาร',
+                            description: 'ถนนชื่อดังของแบ็คแพ็คเกอร์ทั่วโลก เต็มไปด้วยร้านอาหาร บาร์ โรงแรมราคาประหยัด ร้านนวด และบรรยากาศยามค่ำคืนที่คึกคัก.',
+                            time: 'เปิด 24 ชั่วโมง (คึกคักช่วงเย็นถึงดึก)',
+                            price: 'ฟรี (ค่าใช้จ่ายส่วนตัว)',
+                            map_link: 'https://maps.app.goo.gl/rGUWbRfdYGwCNNKG8',
+                            images: [
+                                'https://image.springnews.co.th/uploads/images/md/2022/01/Jb8yrkpuYzcxNMRtghMI.webp',
+                                'https://placehold.co/700x250/98FB98/228B22?text=ถนนข้าวสาร+2'
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'chonburi',
+                    name: 'ชลบุรี',
+                    description: 'จังหวัดชายฝั่งทะเลตะวันออกที่เต็มไปด้วยสีสัน ทั้งชายหาดสวยงาม แหล่งท่องเที่ยวบันเทิง และอาหารทะเลสดใหม่.',
+                    duration: '2 วัน 1 คืน',
+                    suitable: 'กลุ่มเพื่อน, ครอบครัว, เที่ยวใกล้กรุงเทพฯ',
+                    image: 'https://roijang.com/wp-content/uploads/2023/06/395b55b2-e65c-4472-8f04-d2d40f2207b2.jpg',
+                    map_link: 'https://maps.app.goo.gl/qKXJCbHZp5WxcZuKA',
+                    sub_destinations: [
+                        { name: 'หาดบางแสน', description: 'ชายหาดยอดนิยมใกล้กรุงเทพฯ บรรยากาศสบายๆ เหมาะแก่การพักผ่อนและทำกิจกรรมทางน้ำ.', time: 'เปิดตลอด', price: 'ฟรี', map_link: 'https://maps.app.goo.gl/6NCeWdw83fcLerKy9', images: ['https://www.salika.co/wp-content/uploads/2020/06/bangsaen-beach-post-covid19-tourism-13.jpg'] },
+                        { name: 'เขาชีจรรย์', description: 'สถานที่อันศักดิ์สิทธิ์ที่ประดิษฐานพระพุทธรูปแกะสลักบนหน้าผาขนาดใหญ่ด้วยแสงเลเซอร์ สวยงามตระการตา.', time: '08:00 - 17:00 น.', price: 'ฟรี', map_link: 'https://maps.app.goo.gl/uPkdaKfHra1QSR9Y7', images: ['https://atmindgroup.com/thegrasspattaya/wp-content/uploads/2020/09/feature-image-atmind-group-website-4.png'] },
+                        { name: 'สวนนงนุชพัทยา', description: 'สวนพฤกษศาสตร์ขนาดใหญ่ระดับโลก มีการจัดสวนที่สวยงามหลากหลายรูปแบบ และการแสดงทางวัฒนธรรม.', time: '08:00 - 18:00 น.', price: 'ชาวต่างชาติ 500 บาท, คนไทย 300 บาท', map_link: 'https://maps.app.goo.gl/jTHfsWh6Kx2kDPyJ8', images: ['https://www.ipattaya.co/wp-content/uploads/2023/03/%E0%B8%AA%E0%B8%B3%E0%B9%80%E0%B8%99%E0%B8%B2%E0%B8%82%E0%B8%AD%E0%B8%87-PIC0214_20201113220737-scaled.jpg'] }
+                    ]
+                },
+                {
+                    id: 'kanchanaburi',
+                    name: 'กาญจนบุรี',
+                    description: 'จังหวัดแห่งประวัติศาสตร์และธรรมชาติที่งดงาม ทั้งสะพานข้ามแม่น้ำแคว น้ำตก และอุทยานแห่งชาติที่อุดมสมบูรณ์.',
+                    duration: '2 วัน 1 คืน',
+                    suitable: 'ผู้สนใจประวัติศาสตร์, ธรรมชาติ, ผจญภัย',
+                    image: 'https://www.checkinchill.com/storage/content/be01340d-a4c7-4ab8-962d-3b1ebc6a9708.webp',
+                    map_link: 'https://maps.app.goo.gl/ki3tnumM1sbkJ53F8',
+                    sub_destinations: [
+                        { name: 'สะพานข้ามแม่น้ำแคว', description: 'สัญลักษณ์ของจังหวัดกาญจนบุรี และเป็นส่วนหนึ่งของเส้นทางรถไฟสายมรณะ มีคุณค่าทางประวัติศาสตร์.', time: 'เปิดตลอด', price: 'ฟรี', map_link: 'https://maps.app.goo.gl/6r6MYEjKm2FrP1UA7', images: ['https://lh7-us.googleusercontent.com/59a69mq9opGxLrZm3jjoDIAzjNeYw939_qHKMsIqCtNRzzN4SRgPNGoH0DdmEoQ5CJt584DU9HuvVGbfNQ54AhHOMrXJ3pT6vsk2K5xgv7JGL_nGYTeYO8CwZ9DNJxD2GM-BnqQKJFIrV72P'] },
+                        { name: 'น้ำตกเอราวัณ', description: 'น้ำตกหินปูนขนาดใหญ่ 7 ชั้นในอุทยานแห่งชาติเอราวัณ มีน้ำใสสีเขียวมรกตตลอดปี.', time: '08:00 - 16:30 น.', price: 'ชาวต่างชาติ 300 บาท, คนไทย 100 บาท', map_link: 'https://maps.app.goo.gl/tEsJpWpvPREDky3cA', images: ['https://www.riverkwaijunglerafts.com/wp-content/uploads/2024/08/3.1.webp'] },
+                        { name: 'เมืองมัลลิกา ร.ศ. ๑๒๔', description: 'เมืองย้อนยุคที่จำลองวิถีชีวิตชาวสยามในสมัยรัตนโกสินทร์ช่วงรัชกาลที่ ๕ พร้อมสัมผัสวัฒนธรรมและอาหารโบราณ.', time: '09:00 - 18:00 น.', price: 'ชาวต่างชาติ 350 บาท, คนไทย 250 บาท', map_link: 'https://maps.app.goo.gl/xCTbphu4jEdjTQqG9', images: ['https://f.ptcdn.info/101/050/000/onfea26raOm7DhlcDQb-o.jpg'] }
+                    ]
+                },
+                {
+                    id: 'phuket',
+                    name: 'ภูเก็ต',
+                    description: 'ไข่มุกแห่งอันดามันที่โด่งดังไปทั่วโลกด้วยชายหาดทรายขาว น้ำทะเลสีคราม และกิจกรรมทางน้ำมากมาย พร้อมชีวิตยามค่ำคืนที่คึกคัก.',
+                    duration: '5 วัน 4 คืน',
+                    suitable: 'ครอบครัว, คู่รัก, กลุ่มเพื่อน',
+                    image: 'https://www.ktc.co.th/pub/media/Travel-Story/Thailand/travel-in-phuket/travel-in-phuket-promo.webp',
+                    map_link: 'https://maps.app.goo.gl/zJEixbDAaJtaNjzB6',
+                    sub_destinations: [
+                        { name: 'หาดป่าตอง', description: 'หาดทรายยอดนิยมที่มีชีวิตชีวา ทั้งกลางวันและกลางคืน เหมาะสำหรับพักผ่อนและกิจกรรมทางน้ำ', time: 'เปิดตลอด', price: 'ฟรี', map_link: 'https://maps.app.goo.gl/eGYKGnP34qqvvkPN6', images: ['https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/11/63/50/patong.jpg?w=900&h=500&s=1'] },
+                        { name: 'เมืองเก่าภูเก็ต', description: 'ย่านประวัติศาสตร์ที่มีอาคารสไตล์ชิโน-โปรตุกีสสวยงาม ร้านกาแฟเก๋ๆ และสตรีทอาร์ตน่าสนใจ', time: 'เปิดตลอด', price: 'ฟรี', map_link: 'https://maps.app.goo.gl/PujwfW6zSzQkvevq9', images: ['https://d2e5ushqwiltxm.cloudfront.net/wp-content/uploads/sites/85/2025/03/13092459/old-Phuket-Town.jpg'] },
+                        { name: 'เกาะพีพี ', description: 'กลุ่มเกาะที่สวยงามระดับโลก มีทะเลสีคราม หาดทรายขาว และปะการังที่สมบูรณ์ เหมาะแก่การดำน้ำ', time: 'ทริปเรือตั้งแต่เช้า', price: 'ค่าทัวร์', map_link: 'https://maps.app.goo.gl/LFwdVn5BXdkuuMZ69', images: ['https://www.krabipao.go.th/files/com_travel/2020-07_b6bbce1ec3c4e5b.jpg'] }
+                    ]
+                },
+                {
+                    id: 'chiangmai',
+                    name: 'เชียงใหม่',
+                    description: 'เมืองแห่งวัฒนธรรมล้านนา ท่ามกลางขุนเขาและธรรมชาติที่งดงาม พร้อมวัดวาอารามโบราณ กาแฟอร่อย และบรรยากาศสุดชิลล์.',
+                    duration: '4 วัน 3 คืน',
+                    suitable: 'คู่รัก, ครอบครัว, สายผจญภัย',
+                    image: 'https://vasimr.net/wp-content/uploads/2023/04/%E0%B9%80%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%A7%E0%B9%80%E0%B8%8A%E0%B8%B5%E0%B8%A2%E0%B8%87%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%88-2566.jpg',
+                    map_link: 'https://maps.app.goo.gl/6k8bdyvL27QTppXj6',
+                    sub_destinations: [
+                        { name: 'วัดพระธาตุดอยสุเทพ', description: 'สถานที่สำคัญทางศาสนาและวัฒนธรรมของเชียงใหม่ ตั้งอยู่บนยอดดอยสุเทพ มองเห็นทิวทัศน์เมืองเชียงใหม่ได้กว้างไกล', time: '06:00 - 18:00 น.', price: 'คนไทยฟรี, ต่างชาติ 30 บาท', map_link: 'https://maps.app.goo.gl/xA9z11hc7QfyqQas6', images: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0bq-100eSIaEAHmj8hDcljpCOMmfL6p7e9A&s'] },
+                        { name: 'ดอยอินทนนท์', description: 'ยอดเขาที่สูงที่สุดในประเทศไทย มีสภาพอากาศเย็นสบายตลอดปี เป็นที่ตั้งของสถานีเกษตรหลวงอินทนนท์ และน้ำตกสวยงามหลายแห่ง', time: '05:00 - 17:00 น.', price: 'คนไทย 50 บาท, ต่างชาติ 300 บาท', map_link: 'https://maps.app.goo.gl/bqa5peuVjbPf7iN88', images: ['https://image-tc.galaxy.tf/wijpeg-sxrfid5inslt46adwg0pwpho/intanon_standard.jpg?crop=112%2C0%2C1777%2C1333'] },
+                        { name: 'ถนนคนเดินท่าแพ', description: 'แหล่งรวมสินค้าหัตถกรรม อาหารพื้นเมือง และการแสดงวัฒนธรรมในยามค่ำคืนของวันอาทิตย์', time: '17:00 - 22:00 น. (เฉพาะวันอาทิตย์)', price: 'ฟรี', map_link: 'https://maps.app.goo.gl/SYto8ggDSUNjL51r5', images: ['https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/cf/84/43/walking-street.jpg?w=1200&h=-1&s=1'] }
+                    ]
+                },
+                {
+                    id: 'prachuap-khiri-khan',
+                    name: 'ประจวบคีรีขันธ์',
+                    description: 'จังหวัดชายทะเลที่มีชื่อเสียงด้านชายหาดสวยงาม เมืองตากอากาศ และอุทยานแห่งชาติที่น่าสนใจ.',
+                    duration: '2 วัน 1 คืน',
+                    suitable: 'พักผ่อนริมทะเล, ครอบครัว',
+                    image: 'https://lh6.googleusercontent.com/proxy/UIdeNBGlal_P2KKBbELUL18JexAdcNqm6qN6Nlw8iZ1d4a8Yx-_Ms8k8HSlrARnoIg0tu4LL1i_BIIG1ETsWUwfWhKs1',
+                    map_link: 'https://maps.app.goo.gl/1nE1GRzPLc6rX7J86',
+                    sub_destinations: [
+                        {
+                            name: 'หัวหิน', description: 'เมืองตากอากาศยอดนิยม มีชายหาดที่สวยงาม พระราชวังไกลกังวล และตลาดโต้รุ่งหัวหิน.', time: 'เปิดตลอด', price: 'ฟรี',
+                            map_link: 'https://maps.app.goo.gl/NtcBegBx5uMBqzn7A',
+                            images: ['https://movenpickhuahin.com/wp-content/uploads/2023/10/Hua-Hin-Beach-1.jpg']
+                        },
+                        {
+                            name: 'อุทยานแห่งชาติเขาสามร้อยยอด', description: 'อุทยานแห่งชาติทางทะเลแห่งแรกของไทย มีภูเขาหินปูน ถ้ำสวยงาม และเป็นแหล่งดูนกที่สำคัญ.', time: '08:00 - 16:30 น.', price: 'ชาวต่างชาติ 200 บาท, คนไทย 40 บาท',
+                            map_link: 'https://maps.app.goo.gl/KvunBTdokWDBBCYh7',
+                            images: ['https://f.ptcdn.info/304/057/000/p7umahoal2pSL8MJ89T-o.jpg']
+                        },
+                        {
+                            name: 'เขาช่องกระจก', description: 'จุดชมวิวเมืองประจวบคีรีขันธ์และอ่าวมะนาวแบบ 360 องศา พร้อมนมัสการรอยพระพุทธบาทบนยอดเขา.', time: '06:00 - 18:00 น.', price: 'ฟรี',
+                            map_link: 'https://maps.app.goo.gl/7CLjEkmvxND7eC7e6',
+                            images: ['https://tatdataapi.io/dmc-images/1a588e28-e5b5-4949-b180-15bb50e27405.jpeg']
+                        }
+                    ]
+                },
+                {
+                    id: 'ayutthaya',
+                    name: 'พระนครศรีอยุธยา',
+                    description: 'อดีตราชธานีอันยิ่งใหญ่ของไทย มรดกโลกที่เต็มไปด้วยวัดวาอาราม โบราณสถาน และประวัติศาสตร์อันล้ำค่า.',
+                    duration: '1 วัน',
+                    suitable: 'ผู้สนใจประวัติศาสตร์, ทริปสั้นๆ',
+                    image: 'https://roijang.com/wp-content/uploads/2024/09/S__78839838.jpg',
+                    map_link: 'https://maps.app.goo.gl/oENKy4JMvJWGVuq16',
+                    sub_destinations: [
+                        {
+                            name: 'วัดไชยวัฒนาราม',
+                            description: 'วัดเก่าแก่สมัยอยุธยาตอนปลาย ตั้งอยู่ริมแม่น้ำเจ้าพระยา มีสถาปัตยกรรมแบบขอมที่สวยงามตระการตา.',
+                            time: '08:00 - 18:00 น.',
+                            price: 'ชาวต่างชาติ 50 บาท, คนไทย 10 บาท',
+                            map_link: 'https://maps.app.goo.gl/3Jp6SY81DNbob1Wv8',
+                            images: ['https://go.ayutthaya.go.th/wp-content/uploads/2020/03/IMG_8207-Medium-1152x675.jpg', 'https://www.paiduaykan.com/province/central/ayutthaya/watcheiwattanaram/img/watchei05.jpg']
+                        },
+                        {
+                            name: 'วัดมหาธาตุ (เศียรพระในต้นไม้)',
+                            description: 'วัดสำคัญที่เคยเป็นที่ประดิษฐานพระบรมธาตุของพระพุทธเจ้า โดดเด่นด้วยเศียรพระพุทธรูปในรากต้นโพธิ์.',
+                            time: '08:00 - 17:00 น.',
+                            price: 'ชาวต่างชาติ 50 บาท, คนไทย 10 บาท',
+                            map_link: 'https://maps.app.goo.gl/fF5N9M2aA2oCM1KR6',
+                            images: ['https://www.mcot.net/uploads/article/202411/5682b2255ba3ce3e937d43f143d87da8.jpg', 'https://thai.tourismthailand.org/fileadmin/upload_wizard/2016_upload/23-11-2016-WatMahathat.jpg']
+                        },
+                        {
+                            name: 'พระราชวังบางปะอิน',
+                            description: 'พระราชวังเก่าแก่สมัยอยุธยาและเป็นที่ประทับแปรพระราชฐานของพระมหากษัตริย์ในสมัยรัตนโกสินทร์ มีสถาปัตยกรรมหลากหลายรูปแบบ.',
+                            time: '08:00 - 16:00 น.',
+                            price: 'ชาวต่างชาติ 100 บาท, คนไทย 30 บาท',
+                            map_link: 'https://maps.app.goo.gl/LCyTf3WxJAFh5kzMA',
+                            images: ['https://go.ayutthaya.go.th/wp-content/uploads/2022/02/10-1200x675.png', 'https://www.paiduaykan.com/province/central/ayutthaya/bangpain/img/bangpain03.jpg']
+                        }
+                    ]
+                },
+                {
+                    id: 'phetchaburi',
+                    name: 'เพชรบุรี',
+                    description: 'เมืองสามวังที่เต็มไปด้วยประวัติศาสตร์ วัฒนธรรม และแหล่งท่องเที่ยวทางธรรมชาติที่หลากหลาย ทั้งภูเขา ถ้ำ และทะเล.',
+                    duration: '1 วัน',
+                    suitable: 'ผู้สนใจประวัติศาสตร์, ธรรมชาติ',
+                    image: 'https://checkinchill.com/storage/content/df9c70eb-dc9c-4a23-ac74-56af7d7507eb.webp',
+                    map_link: 'https://maps.app.goo.gl/eARYVzqewWTkYSHU7',
+                    sub_destinations: [
+                        {
+                            name: 'พระราชวังพระนครคีรี (เขาวัง)', description: 'พระราชวังบนยอดเขาที่สร้างขึ้นในสมัยรัชกาลที่ ๔ และ ๕ ผสมผสานสถาปัตยกรรมไทย จีน และตะวันตก มองเห็นทิวทัศน์เมืองเพชรบุรี.', time: '08:30 - 16:30 น.', price: 'ชาวต่างชาติ 150 บาท, คนไทย 20 บาท',
+                            map_link: 'https://maps.app.goo.gl/jRyeznTyhP2azGiDA',
+                            images: ['https://phetchaburi.prd.go.th/th/file/get/file/20240513d88bac7c1af589282c5d408b3e3214db082022.jpg']
+                        },
+                        {
+                            name: 'หาดชะอำ', description: 'ชายหาดยอดนิยมของเพชรบุรี บรรยากาศเงียบสงบกว่าหัวหินเล็กน้อย เหมาะแก่การพักผ่อน.', time: 'เปิดตลอด', price: 'ฟรี',
+                            map_link: 'https://maps.app.goo.gl/BY3dU9Bxq8N5u2io9',
+                            images: ['https://tatdataapi.io/dmc-images/90453733-ccb9-4137-b364-ba9ca55a610f.jpeg']
+                        },
+                        {
+                            name: 'ถ้ำเขาหลวง', description: 'ถ้ำขนาดใหญ่ที่มีปล่องรับแสงธรรมชาติส่องลงมา สวยงามตระการตา เป็นที่ประดิษฐานพระพุทธรูปปางต่างๆ.', time: '08:00 - 17:00 น.', price: 'ฟรี',
+                            map_link: 'https://maps.app.goo.gl/4cG74MJ9exY7fuSQ6',
+                            images: ['https://img.kapook.com/u/2022/sutasinee/01/42.jpg']
+                        }
+                    ]
+                },
+                {
+                    id: 'surat-thani',
+                    name: 'สุราษฎร์ธานี',
+                    description: 'ประตูสู่หมู่เกาะอ่าวไทยที่มีชื่อเสียง ทั้งเกาะสมุย เกาะพะงัน และเกาะเต่า พร้อมอุทยานแห่งชาติทางบกที่อุดมสมบูรณ์.',
+                    duration: '3 วัน 2 คืน',
+                    suitable: 'ดำน้ำ, พักผ่อนบนเกาะ, ธรรมชาติ',
+                    image: 'https://img.salehere.co.th/p/1200x0/2022/12/10/ps5yxqosyali.jpg',
+                    map_link: '',
+                    sub_destinations: [
+                        {
+                            name: 'เขื่อนเชี่ยวหลาน (กุ้ยหลินเมืองไทย)', description: 'เขื่อนขนาดใหญ่กลางป่าเขาที่มีภูเขาหินปูนน้อยใหญ่โผล่พ้นน้ำ งดงามราวกับกุ้ยหลินของจีน.', time: '08:00 - 17:00 น.', price: 'ค่าเรือนำเที่ยว',
+                            map_link: 'https://maps.app.goo.gl/QcuB4PxiEe9WDhZp8',
+                            images: ['https://www.thaitoptour.com/wp-content/uploads/2020/04/1-e1587179214808.jpg']
+                        },
+                        {
+                            name: 'เกาะสมุย', description: 'เกาะสวรรค์แห่งอ่าวไทย มีหาดเฉวงและหาดละไมที่เป็นที่นิยม รีสอร์ทหรูหรา และธรรมชาติที่ยังคงความบริสุทธิ์.', time: 'เปิดตลอด', price: 'ฟรี (กิจกรรมมีค่าใช้จ่าย)',
+                            map_link: 'https://maps.app.goo.gl/bRxTgtn6jPnjHjDo6',
+                            images: ['https://content.r9cdn.net/rimg/dimg/75/a7/44202281-city-56280-1767207b463.jpg?width=1366&height=768&xhint=2611&yhint=2498&crop=true&watermarkposition=lowerright']
+                        },
+                        {
+                            name: 'เกาะพะงัน', description: 'เกาะที่โด่งดังเรื่อง Full Moon Party และชายหาดสวยงามที่เหมาะสำหรับผู้ที่ต้องการความสงบในวันธรรมดา.', time: 'เปิดตลอด', price: 'ฟรี (กิจกรรมมีค่าใช้จ่าย)',
+                            map_link: 'https://maps.app.goo.gl/2ZhamUMoVHJJv5Jf9',
+                            images: ['https://mediaim.expedia.com/destination/1/d601c17307ad9d71999dab2aec21842c.jpg']
+                        }
+                    ]
+                },
+                {
+                    id: 'nakhon-ratchasima',
+                    name: 'นครราชสีมา',
+                    description: 'ประตูสู่ภาคอีสาน มีอุทยานแห่งชาติเขาใหญ่ แหล่งท่องเที่ยวเชิงเกษตร และแหล่งอารยธรรมขอมโบราณ.',
+                    duration: '2 วัน 1 คืน',
+                    suitable: 'ธรรมชาติ, ครอบครัว, แคมป์ปิ้ง',
+                    image: 'https://roijang.com/wp-content/uploads/2023/08/90d96447-764a-466f-97ee-3b813d847d3e_0.jpg',
+                    map_link: 'https://maps.app.goo.gl/y4kTpTk7kWKnwgX68',
+                    sub_destinations: [
+                        {
+                            name: 'อุทยานแห่งชาติเขาใหญ่', description: 'อุทยานแห่งชาติแห่งแรกของไทย มรดกโลกทางธรรมชาติ มีป่าไม้สมบูรณ์ น้ำตกสวยงาม และสัตว์ป่าหลากหลาย.', time: '06:00 - 18:00 น.', price: 'ชาวต่างชาติ 400 บาท, คนไทย 40 บาท',
+                            map_link: 'https://maps.app.goo.gl/mFPPjeYoWyd3BJPFA',
+                            images: ['https://www.prachachat.net/wp-content/uploads/2021/01/1-11.jpg']
+                        },
+                        {
+                            name: 'ฟาร์มโชคชัย', description: 'ฟาร์มโคนมขนาดใหญ่ที่มีกิจกรรมหลากหลาย ทั้งชมฟาร์ม สัมผัสชีวิตคาวบอย และชิมไอศกรีมอร่อย.', time: '10:00 - 17:00 น. (ปิดวันจันทร์)', price: 'ค่าเข้าชมกิจกรรม',
+                            map_link: 'https://maps.app.goo.gl/QY8WDBWtRx3aYc3B7',
+                            images: ['https://mpics.mgronline.com/pics/Images/565000009602205.JPEG']
+                        },
+                        {
+                            name: 'ตลาดน้ำเขาใหญ่', description: 'แหล่งรวมอาหารอร่อย สินค้าพื้นเมือง และของที่ระลึก ท่ามกลางบรรยากาศริมน้ำที่เย็นสบาย.', time: '10:00 - 18:00 น.', price: 'ฟรี',
+                            map_link: 'https://maps.app.goo.gl/hstCVo2nzQQNhK13A',
+                            images: ['https://f.ptcdn.info/376/037/000/1447474733-FB20151114-o.jpg']
+                        }
+                    ]
+                }
+            ];
+
+            // --- Data for Accommodations (Main Page Section Data) ---
+            // This data is no longer used for display in the main page
+            // because the accommodations section is removed.
+            // However, keeping it here in case future requests re-introduce it.
+            const accommodationsData = [
+                {
+                    id: 'hotel-bangkok',
+                    name: 'โรงแรมหรูใจกลางกรุงเทพฯ',
+                    description: 'สัมผัสประสบการณ์การพักผ่อนเหนือระดับในใจกลางเมืองกรุง พร้อมสิ่งอำนวยความสะดวกครบครันและการบริการระดับ 5 ดาว.',
+                    image: 'https://placehold.co/600x400/D4F5E8/0F766E?text=Hotel+Bangkok',
+                    stars: 5,
+                    price_range: '฿฿฿฿',
+                    location: 'กรุงเทพมหานคร',
+                    booking_link: 'https://example.com/booking/bkk-hotel'
+                },
+                {
+                    id: 'resort-phuket',
+                    name: 'รีสอร์ทริมหาดภูเก็ต',
+                    description: 'รีสอร์ทสวยงามตั้งอยู่ริมชายหาดอันดามันส่วนตัว เพียบพร้อมด้วยสระว่ายน้ำขนาดใหญ่ ห้องพักวิวทะเล และกิจกรรมทางน้ำ.',
+                    image: 'https://placehold.co/600x400/D1E7F1/1D4ED8?text=Resort+Phuket',
+                    stars: 4,
+                    price_range: '฿฿฿',
+                    location: 'ภูเก็ต',
+                    booking_link: 'https://example.com/booking/phuket-resort'
+                },
+                {
+                    id: 'boutique-chiangmai',
+                    name: 'บูทีคโฮเทลเชียงใหม่',
+                    description: 'ที่พักสไตล์บูทีคที่ผสมผสานเสน่ห์ล้านนาเข้ากับความทันสมัย ตั้งอยู่ใกล้แหล่งท่องเที่ยวสำคัญและตลาดพื้นเมือง.',
+                    image: 'https://placehold.co/600x400/F1E8D1/D97706?text=Boutique+Chiangmai',
+                    stars: 4,
+                    price_range: '฿฿',
+                    location: 'เชียงใหม่',
+                    booking_link: 'https://example.com/booking/cm-boutique'
+                }
+            ];
+
+                
+            // --- Function to load main province cards ---
+            function loadDestinationCards() {
+                const container = document.getElementById('destination-cards-container');
+                container.innerHTML = ''; // Clear existing cards
+
+                destinationsData.forEach((destination, index) => {
+                    const cardHtml = `
+                        <div class="destination-card bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} transform transition-transform hover:scale-[1.01] duration-300" data-destination-id="${destination.id}">
+                            <div class="w-full md:w-1/2 relative">
+                                <div class="relative w-full aspect-ratio-16-9">
+                                    <img src="${destination.image}" alt="${destination.name}"
+                                        class="absolute inset-0 w-full h-full object-cover rounded-t-2xl ${index % 2 === 0 ? 'md:rounded-l-2xl md:rounded-tr-none' : 'md:rounded-r-2xl md:rounded-tl-none'}">
+                                </div>
+                            </div>
+                            <div class="w-full md:w-1/2 p-8 text-left flex flex-col justify-center">
+                                <h3 class="text-3xl font-bold text-teal-700 mb-3">${destination.name}</h3>
+                                <div class="flex items-center text-yellow-500 mb-4">
+                                    <span class="text-xl">★★★★★</span> (500 รีวิว) <!-- Static reviews for now -->
+                                </div>
+                                <p class="text-gray-700 leading-relaxed mb-6">
+                                    ${destination.description}
+                                </p>
+                                <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-x-4 gap-y-2">
+                                    <span><strong class="text-teal-700">⏱️ ระยะเวลา:</strong> ${destination.duration}</span>
+                                    <span><strong class="text-teal-700">👥 เหมาะสำหรับ:</strong> ${destination.suitable}</span>
+                                </div>
+                                <div class="flex flex-col sm:flex-row gap-3">
+                                    <a href="${destination.map_link}" target="_blank"
+                                        class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                            fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                        ดูแผนที่
+                                    </a>
+                                    <button class="view-sub-destinations-btn inline-flex items-center bg-white border-2 border-teal-600 rounded-full py-3 px-6 font-bold text-teal-800 transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-50 justify-center" data-destination-id="${destination.id}">
+                                        <span class="mr-2 text-lg">ดูสถานที่ในจังหวัดนี้</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.insertAdjacentHTML('beforeend', cardHtml);
+                });
+            }
+
+            // --- Function to load accommodation cards for the main Accommodation section ---
+            function loadAccommodationCards() {
+                const container = document.getElementById('accommodation-cards-container');
+                container.innerHTML = ''; // Clear existing cards
+
+                // accommodationsData is no longer used for display in the main page,
+                // but keeping the function structure in case it's needed again.
+                // If you want to completely remove accommodation data, you can delete this function and the accommodationsData array.
+
+                /*
+                accommodationsData.forEach((accommodation) => {
+                    const starsHtml = '★'.repeat(accommodation.stars) + '☆'.repeat(5 - accommodation.stars);
+                    const cardHtml = `
+                        <div class="accommodation-card bg-white rounded-2xl shadow-xl overflow-hidden transform transition-transform hover:scale-[1.02] duration-300">
+                            <div class="relative w-full aspect-ratio-16-9">
+                                <img src="${accommodation.image}" alt="${accommodation.name}"
+                                    class="absolute inset-0 w-full h-full object-cover rounded-t-2xl"
+                                    onerror="this.onerror=null;this.src='https://placehold.co/600x400/E0F2F1/0D9488?text=Image+Not+Found';">
+                            </div>
+                            <div class="p-6 text-left">
+                                <h3 class="text-2xl font-bold text-teal-700 mb-2">${accommodation.name}</h3>
+                                <div class="flex items-center text-yellow-500 mb-3">
+                                    <span class="text-xl">${starsHtml}</span>
+                                    <span class="ml-2 text-gray-600 text-sm">${accommodation.stars} ดาว</span>
+                                </div>
+                                <p class="text-gray-700 leading-relaxed text-base mb-4">${accommodation.description}</p>
+                                <div class="flex flex-wrap items-center text-gray-600 text-sm mb-4 gap-x-4 gap-y-2">
+                                    <span><strong class="text-teal-700">📍 ที่ตั้ง:</strong> ${accommodation.location}</span>
+                                    <span><strong class="text-teal-700">💰 ราคา:</strong> ${accommodation.price_range}</span>
+                                </div>
+                                <a href="${accommodation.booking_link}" target="_blank"
+                                    class="inline-flex items-center bg-orange-500 border-2 border-orange-500 rounded-full py-3 px-6 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-orange-600 justify-center w-full">
+                                    <span class="mr-2 text-lg">จองเลย!</span>
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    container.insertAdjacentHTML('beforeend', cardHtml);
+                });
+                */
+            }
+
+
+            // --- Province Detail Modal Logic (Combined Modal) ---
+            const provinceDetailModal = document.getElementById('province-detail-modal');
+            const provinceDetailTitle = document.getElementById('province-detail-title');
+            const provinceSubDestinationsContainer = document.getElementById('province-sub-destinations-container');
+
+            // Open Province Detail Modal
+            document.getElementById('destination-cards-container').addEventListener('click', (e) => {
+                const targetButton = e.target.closest('.view-sub-destinations-btn');
+                if (targetButton) {
+                    const destinationId = targetButton.dataset.destinationId;
+                    const selectedDestination = destinationsData.find(d => d.id === destinationId);
+
+                    if (selectedDestination) {
+                        provinceDetailTitle.textContent = `รายละเอียดสำหรับ ${selectedDestination.name}`;
+                        provinceSubDestinationsContainer.innerHTML = ''; // Clear previous content
+
+                        // --- Render Sub-Destinations (Tourist Spots) ---
+                        if (selectedDestination.sub_destinations && selectedDestination.sub_destinations.length > 0) {
+                            selectedDestination.sub_destinations.forEach((subDest) => {
+                                const subDestBlock = document.createElement('div');
+                                subDestBlock.classList.add('sub-destination-block');
+
+                                let timeInfoHtml = subDest.time ? `<span><strong class="text-teal-700">⏱️ เวลาทำการ:</strong> ${subDest.time}</span>` : '';
+                                let priceInfoHtml = subDest.price ? `<span><strong class="text-teal-700">🎫 ค่าเข้าชม:</strong> ${subDest.price}</span>` : '';
+                                let mapLinkHtml = subDest.map_link ? `
+                                    <a href="${subDest.map_link}" target="_blank"
+                                        class="inline-flex items-center bg-teal-600 border-2 border-teal-600 rounded-full py-2 px-5 font-bold text-white transition-transform transform hover:scale-105 shadow-lg hover:bg-teal-700 justify-center text-sm mt-4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                                        </svg>
+                                        ดูแผนที่
+                                    </a>` : '';
+
+                                // Use the first image for the block, or a placeholder if no images
+                                const imageUrl = (subDest.images && subDest.images.length > 0) ? subDest.images[0] : "https://placehold.co/700x250/E0E0E0/888888?text=No+Image+Available";
+
+                                subDestBlock.innerHTML = `
+                                    <img src="${imageUrl}" alt="${subDest.name}">
+                                    <h4 class="text-2xl font-semibold text-teal-800 mb-2">${subDest.name}</h4>
+                                    <p class="text-gray-700 text-base mb-3">${subDest.description || 'ไม่มีคำอธิบาย'}</p>
+                                    <div class="flex flex-wrap items-center text-gray-600 text-sm gap-x-4 gap-y-2 mb-4">
+                                        ${timeInfoHtml}
+                                        ${priceInfoHtml}
+                                    </div>
+                                    ${mapLinkHtml}
+                                `;
+                                provinceSubDestinationsContainer.appendChild(subDestBlock);
+                            });
+                        } else {
+                            provinceSubDestinationsContainer.innerHTML = `<p class="text-gray-600 text-base text-center py-4">ยังไม่มีข้อมูลสถานที่ท่องเที่ยวสำหรับจังหวัดนี้</p>`;
+                        }
+
+                        provinceDetailModal.classList.add('active');
+                        document.body.style.overflow = 'hidden'; // Prevent scrolling body
+                    }
+                }
+            });
+
+            // Close Province Detail Modal when clicking on the overlay itself
+            provinceDetailModal.addEventListener('click', (e) => {
+                // Check if the click occurred directly on the modal overlay (not its content)
+                if (e.target === provinceDetailModal) {
+                    provinceDetailModal.classList.remove('active');
+                    document.body.style.overflow = ''; // Restore scrolling
+                }
+            });
+
+            // Global Escape key listener for the modal
+            document.addEventListener('keydown', (e) => {
+                if (provinceDetailModal.classList.contains('active') && e.key === 'Escape') {
+                    provinceDetailModal.classList.remove('active');
+                    document.body.style.overflow = ''; // Restore scrolling
+                }
+            });
+
+            // Initialize all dynamic content when DOM is ready
+            loadDestinationCards();
+            // Since accommodations and gallery sections are removed, no need to call their loading functions.
+            // loadAccommodationCards();
+            // loadGalleryImages();
+        });
+    </script>
+
+</body>
+
+</html>
